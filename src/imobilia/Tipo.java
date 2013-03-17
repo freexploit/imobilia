@@ -13,7 +13,7 @@ public enum Tipo {
     LOTE ("Lote"),
     BODEGA ("Bodega"),
     CASA("Casa"),
-    EDIFICIO("EDIFICIO"),
+    EDIFICIO("Edificio"),
     LOCAL("Local");
     
     
