@@ -4,6 +4,9 @@
  */
 package imobilia;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aleon
@@ -18,15 +21,20 @@ public class ServiciosAsoc {
         //provedor
 	private String proveedor;
         //constructor
-    public ServiciosAsoc(String Nombre, double tarifaBasica, String proveedor) {
+        public static ArrayList lServicios = new ArrayList();
+    public ServiciosAsoc(String Nombre, double precioConsumo, double tarifaBasica, String proveedor) {
         this.Nombre = Nombre;
         this.tarifaBasica = tarifaBasica;
         this.proveedor = proveedor;
+        this.precioConsumo = precioConsumo;
     }
 
     //getter and setters
     public String getNombre() {
         return Nombre;
+    }
+    public static ArrayList getlServicios() {
+        return lServicios;
     }
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
@@ -49,6 +57,14 @@ public class ServiciosAsoc {
     public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
     }
-
+    
+    public void crearObjeto(){
+    String nNombre = JOptionPane.showInputDialog("Ingrese Nombre del Servicio");
+    double nPrecioConsumo = Double.parseDouble(JOptionPane.showInputDialog("Ingrese Precio"));
+    double nTarifaBasica = Double.parseDouble("Ingrese Tarifa Basica");
+    String nProveedor = JOptionPane.showInputDialog("Ingrese Proveedor");
+    ServiciosAsoc servicio1 = new ServiciosAsoc(nNombre, nPrecioConsumo, nTarifaBasica, nProveedor);
+    ServiciosAsoc.lServicios.add(servicio1);
+}
     
 }
