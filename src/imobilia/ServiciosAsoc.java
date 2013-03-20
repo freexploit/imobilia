@@ -20,8 +20,10 @@ public class ServiciosAsoc {
         private double tarifaBasica;
         //provedor
 	private String proveedor;
-        //constructor
+        //ArrayList de servicios
         public static ArrayList lServicios = new ArrayList();
+        //constructores
+    public ServiciosAsoc(){}    
     public ServiciosAsoc(String Nombre, double precioConsumo, double tarifaBasica, String proveedor) {
         this.Nombre = Nombre;
         this.tarifaBasica = tarifaBasica;
