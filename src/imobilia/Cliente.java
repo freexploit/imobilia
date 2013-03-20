@@ -4,24 +4,39 @@
  */
 package imobilia;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aleon
  */
-public class Cliente {
+public class Cliente implements ICrearObjeto{
+        //cedula
     	private long cedula;
-	private int cCod;
-	private String nombre;
+	//codigo cliente
+        private int cCod;
+	//nombre cliente
+        private String nombre;
+        //apellido1
         private String apellido1;
+        //apellido 2
         private String apellido2;
-	private Fecha fechaN;
-	//Físico / Jurídico /pendiente por pensar
-	private long telefono;
-	private String Dirección;
-	//Periodo de pago (30 días – 60 días)/pendiente
+	//fecha nacimiento
+        private Fecha fechaN;
+	//Físico / Jurídico 
+        private int tipoCliente;
+	//telefono
+        private long telefono;
+	//direccion
+        private String direccion;
+	//Periodo de pago (30 días – 60 días)
+        private int periodoPago;
+        //arrylist de clientes
+        private static ArrayList lClientes = new ArrayList();
     
         //constructor por verificar y modificar
-    public Cliente(long cedula, int cCod, String nombre, String apellido1, String apellido2, Fecha fechaN, long telefono, String Dirección) {
+    public Cliente(long cedula, int cCod, String nombre, String apellido1, String apellido2, Fecha fechaN, long telefono, String direccion, int tipoCliente, int periodoPago) {
         this.cedula = cedula;
         this.cCod = cCod;
         this.nombre = nombre;
@@ -29,9 +44,35 @@ public class Cliente {
         this.apellido2 = apellido2;
         this.fechaN = fechaN;
         this.telefono = telefono;
-        this.Dirección = Dirección;
+        this.direccion = direccion;
+        this.tipoCliente = tipoCliente;
+        this.periodoPago = periodoPago;
     }
     //getters y setters
+
+    public int getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(int tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
+
+    public int getPeriodoPago() {
+        return periodoPago;
+    }
+
+    public void setPeriodoPago(int periodoPago) {
+        this.periodoPago = periodoPago;
+    }
+
+    public static ArrayList getlClientes() {
+        return lClientes;
+    }
+
+    public static void setlClientes(ArrayList lClientes) {
+        Cliente.lClientes = lClientes;
+    }
     
     public long getCedula() {
         return cedula;
@@ -75,11 +116,37 @@ public class Cliente {
     public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
-    public String getDirección() {
-        return Dirección;
+    public String getDireccion() {
+        return direccion;
     }
-    public void setDirección(String Dirección) {
-        this.Dirección = Dirección;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
-   
+        private static int LlenarFecha(String Variable) {
+        int vTemporal = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el " + Variable));
+        return (vTemporal);
+        }
+    
+    @Override
+   public void CrearObjeto()
+    {
+    String nNombre = JOptionPane.showInputDialog("");
+    String nApellido1 = JOptionPane.showInputDialog("");
+    String nApellido2 = JOptionPane.showInputDialog("");
+    Long nCedula = Long.parseLong(JOptionPane.showInputDialog(""));
+    int nCCod;
+    if(!Cliente.lClientes.isEmpty()) {
+            nCCod = lClientes.size()+1;
+        }
+    else{nCCod = 1;}//este codigo hay q verificarlo
+    Fecha fecha1 = new Fecha(LlenarFecha("Dia De Nacimiento"),LlenarFecha("Mes de nacimiento"),LlenarFecha("Año"));
+    long nTelefono = Long.parseLong(JOptionPane.showInputDialog(""));
+    String ndireccion = JOptionPane.showInputDialog("");
+    int nTipoCliente = Integer.parseInt(JOptionPane.showInputDialog(""));
+    int nPeriodoPago = Integer.parseInt(JOptionPane.showInputDialog(""));
+    Cliente cliente1 = new Cliente(nCedula, nCCod, nNombre, nApellido1, nApellido2 , fecha1, nTelefono, ndireccion, nTipoCliente, nPeriodoPago);
+    Cliente.lClientes.add(cliente1);
+     
+    }
+            
 }
