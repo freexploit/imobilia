@@ -60,7 +60,7 @@ public class ServiciosAsoc {
         this.proveedor = proveedor;
     }
     
-    public void crearObjeto(){
+    public void CrearObjeto(){
     String nNombre = JOptionPane.showInputDialog("Ingrese Nombre del Servicio");
     double nPrecioConsumo = Double.parseDouble(JOptionPane.showInputDialog("Ingrese Precio"));
     double nTarifaBasica = Double.parseDouble("Ingrese Tarifa Basica");

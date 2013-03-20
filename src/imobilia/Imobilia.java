@@ -19,6 +19,7 @@ public class Imobilia {
         // TODO code application logic here
         Cliente ncliente = new Cliente();
         Propiedades npropiedad = new Propiedades();
+        ServiciosAsoc nservicios = new ServiciosAsoc();
         
         int opc = 0;
         
@@ -36,6 +37,7 @@ public class Imobilia {
                     npropiedad.CrearObjeto();
                     break;
                 case 3:
+                    nservicios.CrearObjeto();
                     break;
                 case 4:
                     System.exit(0);
