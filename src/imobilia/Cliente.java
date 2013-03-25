@@ -70,7 +70,7 @@ public class Cliente {
     public String getdireccion() {
         return direccion;
     }
-    public void setdireccion(String dirección) {
+    public void setdireccion(String direccion) {
         this.direccion = direccion;
     }
    
