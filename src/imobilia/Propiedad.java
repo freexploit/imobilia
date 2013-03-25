@@ -13,7 +13,7 @@ public class Propiedad {
         //codigo de propiedad
     	private int codigoPropiedad;
         //descripcion
-	private String Descripción;
+	private String descripcion;
 	//Ubicación (Provincia y Cantón)
         private String provincia;
         private String canton;
@@ -29,16 +29,16 @@ public class Propiedad {
         //Estado (Desocupada – alquilada - remodelando - vendida)
         private String Estado;
 	//Tamaño del terreno
-        private double tamañoTerreno;
+        private double tamanoTerreno;
         //tiene construccion
         private boolean tieneConstruccion = false;
         //tamaño construccion
         private double tamañoConstruccion;
 
         //constructor por verificar y modificar
-    public Propiedad(int codigoPropiedad, String Descripción, String provincia, String canton, String tipo, Cliente cliente, String proposito, double precio, String Estado, double tamañoTerreno, double tamañoConstruccion) {
+    public Propiedad(int codigoPropiedad, String descripcion, String provincia, String canton, String tipo, Cliente cliente, String proposito, double precio, String Estado, double tamanoTerreno, double tamañoConstruccion) {
         this.codigoPropiedad = codigoPropiedad;
-        this.Descripción = Descripción;
+        this.descripcion = descripcion;
         this.provincia = provincia;
         this.canton = canton;
         this.tipo = tipo;
@@ -46,7 +46,7 @@ public class Propiedad {
         this.proposito = proposito;
         this.precio = precio;
         this.Estado = Estado;
-        this.tamañoTerreno = tamañoTerreno;
+        this.tamanoTerreno = tamanoTerreno;
         this.tamañoConstruccion = tamañoConstruccion;
     }
     //getters y setters
@@ -56,11 +56,11 @@ public class Propiedad {
     public void setCodigoPropiedad(int codigoPropiedad) {
         this.codigoPropiedad = codigoPropiedad;
     }
-    public String getDescripción() {
-        return Descripción;
+    public String getdescripcion() {
+        return descripcion;
     }
-    public void setDescripción(String Descripción) {
-        this.Descripción = Descripción;
+    public void setdescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     public String getProvincia() {
         return provincia;
@@ -105,10 +105,10 @@ public class Propiedad {
         this.Estado = Estado;
     }
     public double getTamañoTerreno() {
-        return tamañoTerreno;
+        return tamanoTerreno;
     }
-    public void setTamañoTerreno(double tamañoTerreno) {
-        this.tamañoTerreno = tamañoTerreno;
+    public void setTamañoTerreno(double tamanoTerreno) {
+        this.tamanoTerreno = tamanoTerreno;
     }
     public boolean isTieneConstruccion() {
         return tieneConstruccion;

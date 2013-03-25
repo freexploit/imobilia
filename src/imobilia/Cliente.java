@@ -16,18 +16,18 @@ public class Cliente {
         private String apellido2;
 	//Físico / Jurídico /pendiente por pensar
 	private long telefono;
-	private String Dirección;
+	private String direccion;
 	//Periodo de pago (30 días – 60 días)/pendiente
     
         //constructor por verificar y modificar
-    public Cliente(long cedula, int cCod, String nombre, String apellido1, String apellido2,long telefono, String Dirección) {
+    public Cliente(long cedula, int cCod, String nombre, String apellido1, String apellido2,long telefono, String direccion) {
         this.cedula = cedula;
         this.cCod = cCod;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.telefono = telefono;
-        this.Dirección = Dirección;
+        this.direccion = direccion;
     }
     //getters y setters
     
@@ -67,11 +67,11 @@ public class Cliente {
     public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
-    public String getDirección() {
-        return Dirección;
+    public String getdireccion() {
+        return direccion;
     }
-    public void setDirección(String Dirección) {
-        this.Dirección = Dirección;
+    public void setdireccion(String dirección) {
+        this.direccion = direccion;
     }
    
 }
