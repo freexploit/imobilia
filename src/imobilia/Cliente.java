@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author aleon
  */
-public class Cliente{
+public class Cliente {
     //cedula
 
     private long cedula;
@@ -51,7 +51,8 @@ public class Cliente{
     }
     //getters y setters
 
-    Cliente(){}
+    Cliente() {
+    }
 
     public int getTipoCliente() {
         return tipoCliente;
@@ -145,25 +146,37 @@ public class Cliente{
     /**
      *
      */
-
     public void CrearObjeto() {
         try {
-        String nNombre = JOptionPane.showInputDialog("ingrese nombre");
-        String nApellido1 = JOptionPane.showInputDialog("ingrese apellido");
-        String nApellido2 = JOptionPane.showInputDialog("ingrese segundo apellido");
-        Long nCedula = Long.parseLong(JOptionPane.showInputDialog("ingrese cedula"));
-        int nCCod;
-        if (Cliente.lClientes.isEmpty()) {nCCod = 0;} 
-        else {nCCod = lClientes.size() + 1;}//este codigo hay q verificarlo
-        Fecha fecha1 = new Fecha(LlenarFecha("Mes de nacimiento"), LlenarFecha("Dia De Nacimiento"), LlenarFecha("Año"));
-        long nTelefono = Long.parseLong(JOptionPane.showInputDialog("ingrese telefono"));
-        String ndireccion = JOptionPane.showInputDialog("ingrese direccion");
-        int nTipoCliente = Integer.parseInt(JOptionPane.showInputDialog("ingrese tipo cliente\n 1 para fisico\n 2 para juridico"));
-        int nPeriodoPago = Integer.parseInt(JOptionPane.showInputDialog("ingrese periodo de pagos \n 1 para 30 dias\n 2 para 60 dias"));
-        Cliente cliente1 = new Cliente(nCedula, nCCod, nNombre, nApellido1, nApellido2, fecha1, nTelefono, ndireccion, nTipoCliente, nPeriodoPago);
-        Cliente.lClientes.add(cliente1);
+            String nNombre = JOptionPane.showInputDialog("ingrese nombre");
+            String nApellido1 = JOptionPane.showInputDialog("ingrese apellido");
+            String nApellido2 = JOptionPane.showInputDialog("ingrese segundo apellido");
+            Long nCedula = Long.parseLong(JOptionPane.showInputDialog("ingrese cedula"));
+            int nCCod;
+            if (Cliente.lClientes.isEmpty()) {
+                nCCod = 0;
+            } else {
+                nCCod = lClientes.size() + 1;
+            }//este codigo hay q verificarlo
+            Fecha fecha1 = new Fecha(LlenarFecha("Mes de nacimiento"), LlenarFecha("Dia De Nacimiento"), LlenarFecha("Año"));
+            long nTelefono = Long.parseLong(JOptionPane.showInputDialog("ingrese telefono"));
+            String ndireccion = JOptionPane.showInputDialog("ingrese direccion");
+            int nTipoCliente = Integer.parseInt(JOptionPane.showInputDialog("ingrese tipo cliente\n 1 para fisico\n 2 para juridico"));
+            int nPeriodoPago = Integer.parseInt(JOptionPane.showInputDialog("ingrese periodo de pagos \n 1 para 30 dias\n 2 para 60 dias"));
+            Cliente cliente1 = new Cliente(nCedula, nCCod, nNombre, nApellido1, nApellido2, fecha1, nTelefono, ndireccion, nTipoCliente, nPeriodoPago);
+            Cliente.lClientes.add(cliente1);
+        } catch (Exception e) {
         }
-        catch(Exception e){}
 
+    }
+
+    public static Cliente BuscarCliente(int nCCod) {
+        for (int i = 0; i < lClientes.size(); i++) {
+            Cliente usuario = (Cliente) lClientes.get(i);
+            if (String.valueOf(usuario.getcCod()).contains(String.valueOf(nCCod))) {
+                return usuario;
+            }
+        }
+        return null;
     }
 }

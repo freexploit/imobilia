@@ -76,11 +76,31 @@ public class ServiciosAsoc {
         try {
             String nNombre = JOptionPane.showInputDialog("Ingrese Nombre del Servicio");
             double nPrecioConsumo = Double.parseDouble(JOptionPane.showInputDialog("Ingrese Precio"));
-            double nTarifaBasica = Double.parseDouble("Ingrese Tarifa Basica");
-            String nProveedor = JOptionPane.showInputDialog("Ingrese Proveedor");
+            double nTarifaBasica = Double.parseDouble(JOptionPane.showInputDialog("Ingrese Tarifa Basica"));
+            String nProveedor = JOptionPane.showInputDialog("Ingrese nombre de  Proveedor");
             ServiciosAsoc servicio1 = new ServiciosAsoc(nNombre, nPrecioConsumo, nTarifaBasica, nProveedor);
             ServiciosAsoc.lServicios.add(servicio1);
         } catch (Exception e) {
         }
     }
+        public static ServiciosAsoc BuscarServicios(String nNombre) {
+        for (int i = 0; i < lServicios.size(); i++) {
+            ServiciosAsoc servicio = (ServiciosAsoc) lServicios.get(i);
+            if (servicio.getNombre().contains(nNombre)) {
+                return servicio;
+            }
+        }
+        return null;
+    }
+                public static String MostrarServicios() {
+                    String Salida="";
+        for (int i = 0; i < lServicios.size(); i++) {
+            ServiciosAsoc servicio = (ServiciosAsoc) lServicios.get(i);
+            String n1 = servicio.getNombre();
+            Salida +="\n"+n1;
+            }
+        JOptionPane.showMessageDialog(null, Salida);
+        return Salida;
+    }
+    
 }
