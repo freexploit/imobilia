@@ -147,6 +147,7 @@ public class Cliente{
      */
 
     public void CrearObjeto() {
+        try {
         String nNombre = JOptionPane.showInputDialog("ingrese nombre");
         String nApellido1 = JOptionPane.showInputDialog("ingrese apellido");
         String nApellido2 = JOptionPane.showInputDialog("ingrese segundo apellido");
@@ -161,6 +162,8 @@ public class Cliente{
         int nPeriodoPago = Integer.parseInt(JOptionPane.showInputDialog("ingrese periodo de pagos \n 1 para 30 dias\n 2 para 60 dias"));
         Cliente cliente1 = new Cliente(nCedula, nCCod, nNombre, nApellido1, nApellido2, fecha1, nTelefono, ndireccion, nTipoCliente, nPeriodoPago);
         Cliente.lClientes.add(cliente1);
+        }
+        catch(Exception e){}
 
     }
 }
