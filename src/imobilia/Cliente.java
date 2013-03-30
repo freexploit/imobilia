@@ -4,6 +4,8 @@
  */
 package imobilia;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author aleon
@@ -17,9 +19,12 @@ public class Cliente {
 	//Físico / Jurídico /pendiente por pensar
 	private long telefono;
 	private String direccion;
+        private ArrayList<Factura> facturas = new ArrayList<Factura>();
 	//Periodo de pago (30 días – 60 días)/pendiente
     
-        //constructor por verificar y modificar
+        //constructor sobrecargado 
+    public Cliente (){}
+    //constructor por verificar y modificar
     public Cliente(long cedula, int cCod, String nombre, String apellido1, String apellido2,long telefono, String direccion) {
         this.cedula = cedula;
         this.cCod = cCod;
@@ -30,6 +35,40 @@ public class Cliente {
         this.direccion = direccion;
     }
     //getters y setters
+    
+    //agrega una nueva factura por pagar y retorna true
+    public boolean setFactura(Factura factura)
+    {
+        if (factura instanceof Factura)
+        {
+            return this.facturas.add(factura);
+        } 
+        else 
+        {
+            return false;
+        }
+      
+    }
+    //busca las facturas que pertenecen al cliente sin pagar y retorna un array con ellas.
+    public ArrayList<Factura> getFacturasPorPagar(){
+        ArrayList<Factura> facturasPorPagar = new ArrayList<Factura>();
+        if(facturas.size()>0)
+        {
+            for (Factura f: facturas)
+            {
+                if (!f.esPagada())
+                {
+                    facturasPorPagar.add(f);
+                }
+            }
+            return facturasPorPagar;
+        }
+        else 
+        {
+            return null;
+        }
+        
+    }
     
     public long getCedula() {
         return cedula;
@@ -70,7 +109,7 @@ public class Cliente {
     public String getdireccion() {
         return direccion;
     }
-    public void setdireccion(String direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
    

@@ -8,9 +8,9 @@ package imobilia;
  *
  * @author aleon
  */
-public class ServiciosAsoc {
+public class Servicio {
     	//nombre
-        private String Nombre;
+        private String nombre;
         //precio por consumo
         private double precioConsumo;
 	//Tarifa básica
@@ -18,18 +18,18 @@ public class ServiciosAsoc {
         //provedor
 	private String proveedor;
         //constructor
-    public ServiciosAsoc(String Nombre, double tarifaBasica, String proveedor) {
-        this.Nombre = Nombre;
+    public Servicio(String nombre, double tarifaBasica, String proveedor) {
+        this.nombre = nombre;
         this.tarifaBasica = tarifaBasica;
         this.proveedor = proveedor;
     }
 
     //getter and setters
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
     public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+        this.nombre = Nombre;
     }
     public double getPrecioConsumo() {
         return precioConsumo;

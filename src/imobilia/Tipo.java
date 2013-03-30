@@ -7,6 +7,7 @@ package imobilia;
 /**
  *
  * @author christopher
+ * Define tipos de bien raiz
  */
 public enum Tipo {
     

@@ -7,6 +7,8 @@ package imobilia;
 /**
  *
  * @author christopher
+ * Define propositos
+ * 
  */
 public enum Proposito {
     

@@ -33,10 +33,10 @@ public class Propiedad {
         //tiene construccion
         private boolean tieneConstruccion = false;
         //tamaño construccion
-        private double tamañoConstruccion;
+        private double tamanoConstruccion;
 
         //constructor por verificar y modificar
-    public Propiedad(int codigoPropiedad, String descripcion, String provincia, String canton, String tipo, Cliente cliente, String proposito, double precio, String Estado, double tamanoTerreno, double tamañoConstruccion) {
+    public Propiedad(int codigoPropiedad, String descripcion, String provincia, String canton, String tipo, Cliente cliente, String proposito, double precio, String Estado, double tamanoTerreno, double tamanoConstruccion) {
         this.codigoPropiedad = codigoPropiedad;
         this.descripcion = descripcion;
         this.provincia = provincia;
@@ -47,7 +47,7 @@ public class Propiedad {
         this.precio = precio;
         this.Estado = Estado;
         this.tamanoTerreno = tamanoTerreno;
-        this.tamañoConstruccion = tamañoConstruccion;
+        this.tamanoConstruccion = tamanoConstruccion;
     }
     //getters y setters
     public int getCodigoPropiedad() {
@@ -116,11 +116,11 @@ public class Propiedad {
     public void setTieneConstruccion(boolean tieneConstruccion) {
         this.tieneConstruccion = tieneConstruccion;
     }
-    public double getTamañoConstruccion() {
-        return tamañoConstruccion;
+    public double getTamanoConstruccion() {
+        return tamanoConstruccion;
     }
-    public void setTamañoConstruccion(double tamañoConstruccion) {
-        this.tamañoConstruccion = tamañoConstruccion;
+    public void setTamanoConstruccion(double tamanoConstruccion) {
+        this.tamanoConstruccion = tamanoConstruccion;
     }
        
         

@@ -7,6 +7,7 @@ package imobilia;
 /**
  *
  * @author christopher
+ * Define estados de las propiedades
  */
 public enum Estado {
     
