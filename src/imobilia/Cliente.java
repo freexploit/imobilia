@@ -156,7 +156,7 @@ public class Cliente {
             if (Cliente.lClientes.isEmpty()) {
                 nCCod = 0;
             } else {
-                nCCod = lClientes.size() + 1;
+                nCCod = lClientes.size();
             }//este codigo hay q verificarlo
             Fecha fecha1 = new Fecha(LlenarFecha("Mes de nacimiento"), LlenarFecha("Dia De Nacimiento"), LlenarFecha("Año"));
             long nTelefono = Long.parseLong(JOptionPane.showInputDialog("ingrese telefono"));
@@ -178,5 +178,19 @@ public class Cliente {
             }
         }
         return null;
+    }
+
+    public static String MostrarCliente() {
+        String Salida = "";
+        for (int i = 0; i < lClientes.size(); i++) {
+            Cliente cliente1 = (Cliente) lClientes.get(i);
+            int c1 = cliente1.getcCod();
+            String n1 = cliente1.getNombre();
+            String n2 = cliente1.getApellido1();
+            String n3 = cliente1.getApellido2();
+            Salida += "\n" + "Nombre: " + n1 + " " + n2 + " " + n3 + " Codigo: " + c1;
+        }
+        JOptionPane.showMessageDialog(null, Salida);
+        return Salida;
     }
 }

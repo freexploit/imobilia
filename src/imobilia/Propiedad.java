@@ -184,6 +184,7 @@ public class Propiedad {
                 String nProvincia = JOptionPane.showInputDialog("ingrese provincia");
                 String nCanton = JOptionPane.showInputDialog("ingrese Canton");
                 int nTipo = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) para lote\n 2) para bodega\n 3) para casa\n 4) para edificio\n 5) para local"));
+                Cliente.MostrarCliente();
                 int nCcod = Integer.parseInt(JOptionPane.showInputDialog("ingrese el Codigo de Cliente"));
                 Cliente nCliente = Cliente.BuscarCliente(nCcod);
                 int nProposito = Integer.parseInt(JOptionPane.showInputDialog("ingrese Proposito:\n 1) vender\n 2) alquilar\n 3) "));
@@ -192,7 +193,7 @@ public class Propiedad {
                 int cantidad = Integer.parseInt("Ingrese la cantidad de servicios de la propiedad");
                 ArrayList nServicios = new ArrayList();
                 for (int i = 0; i < cantidad; i++) {
-                    String sNombre = JOptionPane.showInputDialog("Ingrese el nombre del servcio");
+                    String sNombre = JOptionPane.showInputDialog("Ingrese el nombre exacto del servicio del servcio");
                     ServiciosAsoc nServicio = ServiciosAsoc.BuscarServicios(sNombre);
                     nServicios.add(nServicio);
                 }
