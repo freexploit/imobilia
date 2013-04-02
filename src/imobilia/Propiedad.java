@@ -18,7 +18,7 @@ public class Propiedad {
     //descripcion
     private String descripcion;
     //Ubicación (Provincia y Cantón)
-    private String provincia;
+    private int provincia;
     private String canton;
     //Tipo. (Lote – Bodega – Casa – Edificio - Local)
     private int tipo;
@@ -39,10 +39,10 @@ public class Propiedad {
     //tamaño construccion
     private double tamañoConstruccion;
     //Arraylist de clientes
-    private static ArrayList lPropiedad = new ArrayList();
+    
 
     //constructor por verificar y modificar
-    public Propiedad(int codigoPropiedad, String descripcion, String provincia, String canton, int tipo, Cliente cliente, int proposito, double precio, ArrayList servicios, int Estado, double tamanoTerreno, boolean tieneConstruccion, double tamañoConstruccion) {
+    public Propiedad(int codigoPropiedad, String descripcion, int provincia, String canton, int tipo, Cliente cliente, int proposito, double precio, ArrayList servicios, int Estado, double tamanoTerreno, boolean tieneConstruccion, double tamañoConstruccion) {
         this.codigoPropiedad = codigoPropiedad;
         this.descripcion = descripcion;
         this.provincia = provincia;
@@ -75,11 +75,11 @@ public class Propiedad {
         this.descripcion = descripcion;
     }
 
-    public String getProvincia() {
+    public int getProvincia() {
         return provincia;
     }
 
-    public void setProvincia(String provincia) {
+    public void setProvincia(int provincia) {
         this.provincia = provincia;
     }
 
@@ -101,10 +101,6 @@ public class Propiedad {
 
     public double getTamanoTerreno() {
         return tamanoTerreno;
-    }
-
-    public static ArrayList getlPropiedad() {
-        return lPropiedad;
     }
 
     public void setCanton(String canton) {
@@ -175,44 +171,5 @@ public class Propiedad {
         this.tamañoConstruccion = tamañoConstruccion;
     }
 
-    public void CrearObjeto() {
-        try {
-            if (!Cliente.getlClientes().isEmpty() || !ServiciosAsoc.getlServicios().isEmpty()) {
-            } else {
-                int nCodigoDePropiedad = Integer.parseInt(JOptionPane.showInputDialog("ingrese Coddigo de Propiedad"));
-                String nDescripcion = JOptionPane.showInputDialog("ingrese Descripcion");
-                String nProvincia = JOptionPane.showInputDialog("ingrese provincia");
-                String nCanton = JOptionPane.showInputDialog("ingrese Canton");
-                int nTipo = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) para lote\n 2) para bodega\n 3) para casa\n 4) para edificio\n 5) para local"));
-                Cliente.MostrarCliente();
-                int nCcod = Integer.parseInt(JOptionPane.showInputDialog("ingrese el Codigo de Cliente"));
-                Cliente nCliente = Cliente.BuscarCliente(nCcod);
-                int nProposito = Integer.parseInt(JOptionPane.showInputDialog("ingrese Proposito:\n 1) vender\n 2) alquilar\n 3) "));
-                double nPrecio = Double.parseDouble(JOptionPane.showInputDialog("ingrese el valor de la propiedad"));
-                ServiciosAsoc.MostrarServicios();
-                int cantidad = Integer.parseInt("Ingrese la cantidad de servicios de la propiedad");
-                ArrayList nServicios = new ArrayList();
-                for (int i = 0; i < cantidad; i++) {
-                    String sNombre = JOptionPane.showInputDialog("Ingrese el nombre exacto del servicio del servcio");
-                    ServiciosAsoc nServicio = ServiciosAsoc.BuscarServicios(sNombre);
-                    nServicios.add(nServicio);
-                }
-                int nEstado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el estado de la propiedad:\n 1) alquilada\n 2) remodelando\n 3) vendida"));
-                double nTamanoDelTerreno = Double.parseDouble(JOptionPane.showInputDialog("ingrese Tamaño del terreno"));
-                int nboolean = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) si tiene construccion\n 2) si no tiene construccion"));
-                double nTamanoConstruccion;
-                boolean nTieneConstruccion;
-                if (nboolean == 1) {
-                    nTieneConstruccion = true;
-                    nTamanoConstruccion = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el tamaño de la construccion"));
-                } else {
-                    nTieneConstruccion = false;
-                    nTamanoConstruccion = 0.0;
-                }
-                Propiedad propiedad1 = new Propiedad(nCodigoDePropiedad, nDescripcion, nProvincia, nCanton, nTipo, nCliente, nProposito, nPrecio, nServicios, nEstado, nTamanoDelTerreno, nTieneConstruccion, nTamanoConstruccion);
-                Propiedad.lPropiedad.add(propiedad1);
-            }
-        } catch (Exception e) {
-        }
-    }
+
 }

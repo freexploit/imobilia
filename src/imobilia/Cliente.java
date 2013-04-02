@@ -5,7 +5,7 @@
 package imobilia;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -34,7 +34,8 @@ public class Cliente {
     //Periodo de pago (30 días – 60 días)
     private int periodoPago;
     //arrylist de clientes
-    private static ArrayList lClientes = new ArrayList();
+    private ArrayList<Factura> facturas = new ArrayList<Factura>();
+
 
     //constructor por verificar y modificar
     public Cliente(long cedula, int cCod, String nombre, String apellido1, String apellido2, Fecha fechaN, long telefono, String direccion, int tipoCliente, int periodoPago) {
@@ -48,6 +49,38 @@ public class Cliente {
         this.direccion = direccion;
         this.tipoCliente = tipoCliente;
         this.periodoPago = periodoPago;
+    }
+        public boolean setFactura(Factura factura)
+    {
+        if (factura instanceof Factura)
+        {
+            return this.facturas.add(factura);
+        } 
+        else 
+        {
+            return false;
+        }
+      
+    }
+    //busca las facturas que pertenecen al cliente sin pagar y retorna un array con ellas.
+    public ArrayList<Factura> getFacturasPorPagar(){
+        ArrayList<Factura> facturasPorPagar = new ArrayList<Factura>();
+        if(facturas.size()>0)
+        {
+            for (Factura f: facturas)
+            {
+                if (!f.esPagada())
+                {
+                    facturasPorPagar.add(f);
+                }
+            }
+            return facturasPorPagar;
+        }
+        else 
+        {
+            return null;
+        }
+        
     }
     //getters y setters
 
@@ -68,10 +101,6 @@ public class Cliente {
 
     public void setPeriodoPago(int periodoPago) {
         this.periodoPago = periodoPago;
-    }
-
-    public static ArrayList getlClientes() {
-        return lClientes;
     }
 
     public long getCedula() {
@@ -136,61 +165,5 @@ public class Cliente {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    private static int LlenarFecha(String Variable) {
-        int vTemporal = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el " + Variable));
-        return (vTemporal);
-    }
-
-    /**
-     *
-     */
-    public void CrearObjeto() {
-        try {
-            String nNombre = JOptionPane.showInputDialog("ingrese nombre");
-            String nApellido1 = JOptionPane.showInputDialog("ingrese apellido");
-            String nApellido2 = JOptionPane.showInputDialog("ingrese segundo apellido");
-            Long nCedula = Long.parseLong(JOptionPane.showInputDialog("ingrese cedula"));
-            int nCCod;
-            if (Cliente.lClientes.isEmpty()) {
-                nCCod = 0;
-            } else {
-                nCCod = lClientes.size();
-            }//este codigo hay q verificarlo
-            Fecha fecha1 = new Fecha(LlenarFecha("Mes de nacimiento"), LlenarFecha("Dia De Nacimiento"), LlenarFecha("Año"));
-            long nTelefono = Long.parseLong(JOptionPane.showInputDialog("ingrese telefono"));
-            String ndireccion = JOptionPane.showInputDialog("ingrese direccion");
-            int nTipoCliente = Integer.parseInt(JOptionPane.showInputDialog("ingrese tipo cliente\n 1 para fisico\n 2 para juridico"));
-            int nPeriodoPago = Integer.parseInt(JOptionPane.showInputDialog("ingrese periodo de pagos \n 1 para 30 dias\n 2 para 60 dias"));
-            Cliente cliente1 = new Cliente(nCedula, nCCod, nNombre, nApellido1, nApellido2, fecha1, nTelefono, ndireccion, nTipoCliente, nPeriodoPago);
-            Cliente.lClientes.add(cliente1);
-        } catch (Exception e) {
-        }
-
-    }
-
-    public static Cliente BuscarCliente(int nCCod) {
-        for (int i = 0; i < lClientes.size(); i++) {
-            Cliente usuario = (Cliente) lClientes.get(i);
-            if (String.valueOf(usuario.getcCod()).contains(String.valueOf(nCCod))) {
-                return usuario;
-            }
-        }
-        return null;
-    }
-
-    public static String MostrarCliente() {
-        String Salida = "";
-        for (int i = 0; i < lClientes.size(); i++) {
-            Cliente cliente1 = (Cliente) lClientes.get(i);
-            int c1 = cliente1.getcCod();
-            String n1 = cliente1.getNombre();
-            String n2 = cliente1.getApellido1();
-            String n3 = cliente1.getApellido2();
-            Salida += "\n" + "Nombre: " + n1 + " " + n2 + " " + n3 + " Codigo: " + c1;
-        }
-        JOptionPane.showMessageDialog(null, Salida);
-        return Salida;
     }
 }
