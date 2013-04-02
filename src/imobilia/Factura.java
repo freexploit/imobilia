@@ -4,6 +4,7 @@
  */
 package imobilia;
 
+import imobilia.Servicio;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

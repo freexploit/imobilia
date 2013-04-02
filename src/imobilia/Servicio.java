@@ -4,6 +4,8 @@
  */
 package imobilia;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aleon
@@ -17,11 +19,16 @@ public class Servicio {
         private double tarifaBasica;
         //provedor
 	private String proveedor;
+       
         //constructor
-    public Servicio(String nombre, double tarifaBasica, String proveedor) {
+    public Servicio() {
+    }
+
+    public Servicio(String nombre, double precioConsumo, double tarifaBasica, String proveedor) {
         this.nombre = nombre;
         this.tarifaBasica = tarifaBasica;
         this.proveedor = proveedor;
+        this.precioConsumo = precioConsumo;
     }
 
     //getter and setters
@@ -49,6 +56,6 @@ public class Servicio {
     public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
     }
-
     
 }
+
