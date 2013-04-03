@@ -25,7 +25,7 @@ public class Imobilia {
         int opc = 0;
         int opc1 = 0;
         while (opc != 5) {//Ciclo while para ejecución del programa
-
+        try{
             //Presenta cuadro de diálogo de menus
             opc = Integer.parseInt(JOptionPane.showInputDialog("Menu de opciones ingrese\n 1) para ver las opciones de Clientes\n 2) ver las opciones de propiedades\n 3) ver las opciones de servicios\n 4) para opciones de reporteria\n 5) para salir"));
             switch (opc) {//Ciclo switch para menu de opciones
@@ -107,7 +107,7 @@ public class Imobilia {
                 case 4://
                     opc1 = 0;
                     while (opc1 != 6) {
-                        opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de Reporteria ingrese:\n 1) para un reporte de propiedas alquiladas y su monto a pagar por servicios\n 2) para propiedades ocupadas\n 3) para propiedades desocupadas\n 4) para listado de propiedades por provincia\n 5) reporte de propiedades por rando de precio\n 6)para salir"));
+                        opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de Reporteria ingrese:\n 1) para un Reporte de propiedas alquiladas y su monto a pagar por servicios\n 2) para propiedades ocupadas\n 3) Reporte de propiedades por provincia\n 4) reporte de propiedades por rango de precio\n 5)para salir"));
                         switch (opc1) {
                             case 1:
                                 ReporteMensual(clientes);
@@ -144,10 +144,9 @@ public class Imobilia {
                             "ERROR", JOptionPane.ERROR_MESSAGE);
                     break;
             }
-
-
+        
+        }catch(Exception e){e.printStackTrace();}
         }
-
 
 
     }
@@ -232,12 +231,12 @@ public class Imobilia {
                 int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de servicios de la propiedad"));
                 for (int i = 0; i < cantidad; i++) {
                     String sNombre = JOptionPane.showInputDialog("Ingrese el nombre exacto del servicio del servcio");
-                    Servicio nServicio = BuscarServicios(sNombre, null);
+                    Servicio nServicio = BuscarServicios(sNombre, servicios);
                     factura.agregarServicio(nServicio);
                 }
                 nCliente.setFactura(factura);
                 }
-                else{JOptionPane.showInputDialog("no existen servicios");}
+                else{JOptionPane.showMessageDialog(null,"no existen servicios");}
                 int nEstado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el estado de la propiedad:\n 1) alquilada\n 2) remodelando\n 3) vendida"));
                 double nTamanoDelTerreno = Double.parseDouble(JOptionPane.showInputDialog("ingrese Tamaño del terreno"));
                 int nboolean = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) si tiene construccion\n 2) si no tiene construccion"));
