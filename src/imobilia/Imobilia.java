@@ -5,7 +5,6 @@
 package imobilia;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import javax.swing.JOptionPane;
 
 /**
