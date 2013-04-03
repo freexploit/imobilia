@@ -22,11 +22,12 @@ public class Factura {
     private Date fecha_creacion = null;
     private Date fecha_vencimiento = null;
     
-    public Factura(){
+    Factura(){
         //inicia las fechas 
         Calendar c = new GregorianCalendar();
         fecha_creacion = c.getTime();
         fecha_vencimiento = fecha_vencimiento();
+        
         
     }
     
@@ -56,7 +57,7 @@ public class Factura {
         }
         else 
         {
-            return false;
+            return this.pagada;
         }
         }
     

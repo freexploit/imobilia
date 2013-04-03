@@ -64,12 +64,13 @@ public class Cliente {
     }
     //busca las facturas que pertenecen al cliente sin pagar y retorna un array con ellas.
     public ArrayList<Factura> getFacturasPorPagar(){
-        ArrayList<Factura> facturasPorPagar = new ArrayList<Factura>();
+        return facturas;
+        /*ArrayList<Factura> facturasPorPagar = new ArrayList<Factura>();
         if(facturas.size()>0)
         {
             for (Factura f: facturas)
             {
-                if (!f.esPagada())
+                if (f.esPagada())
                 {
                     facturasPorPagar.add(f);
                 }
@@ -79,7 +80,7 @@ public class Cliente {
         else 
         {
             return null;
-        }
+        }*/
         
     }
     //getters y setters

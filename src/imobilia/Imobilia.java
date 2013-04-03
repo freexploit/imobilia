@@ -19,9 +19,9 @@ public class Imobilia {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ArrayList<Cliente> clientes = new ArrayList<>();
-        ArrayList<Propiedad> propiedades = new ArrayList<>();
-        ArrayList<Servicio> servicios = new ArrayList<>();
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
+        ArrayList<Servicio> servicios = new ArrayList<Servicio>();
         int opc = 0;
         int opc1 = 0;
         while (opc != 5) {//Ciclo while para ejecución del programa
@@ -110,21 +110,18 @@ public class Imobilia {
                         opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de Reporteria ingrese:\n 1) para un reporte de propiedas alquiladas y su monto a pagar por servicios\n 2) para propiedades ocupadas\n 3) para propiedades desocupadas\n 4) para listado de propiedades por provincia\n 5) reporte de propiedades por rando de precio\n 6)para salir"));
                         switch (opc1) {
                             case 1:
-                                ReporteMensual();
+                                ReporteMensual(clientes);
                                 break;
                             case 2:
                                 OcupiedOrDesocupied(propiedades);
                                 break;
                             case 3:
-                                OcupiedOrDesocupied(propiedades);
+                                ReporteXProvincia(propiedades);
                                 break;
                             case 4:
-                                //ReporteXProvincia();
-                                break;
-                            case 5:
                                 ReporteXPrecio(propiedades);
                                 break;
-                            case 6:
+                            case 5:
                                 break;
                             default:
                                 JOptionPane.showMessageDialog(null, "Error al seleccionar opcion, vuelva a digitar por favor",
@@ -229,15 +226,16 @@ public class Imobilia {
                 Cliente nCliente = BuscarCliente(nCcod, clientes);
                 int nProposito = Integer.parseInt(JOptionPane.showInputDialog("ingrese Proposito:\n 1) vender\n 2) alquilar\n 3)eventos "));
                 double nPrecio = Double.parseDouble(JOptionPane.showInputDialog("ingrese el valor de la propiedad"));
-                ArrayList nServicios = new ArrayList();
                 if(!servicios.isEmpty()){
                 MostrarServicios(servicios);
+                Factura factura = new Factura();
                 int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de servicios de la propiedad"));
                 for (int i = 0; i < cantidad; i++) {
                     String sNombre = JOptionPane.showInputDialog("Ingrese el nombre exacto del servicio del servcio");
                     Servicio nServicio = BuscarServicios(sNombre, null);
-                    nServicios.add(nServicio);
+                    factura.agregarServicio(nServicio);
                 }
+                nCliente.setFactura(factura);
                 }
                 else{JOptionPane.showInputDialog("no existen servicios");}
                 int nEstado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el estado de la propiedad:\n 1) alquilada\n 2) remodelando\n 3) vendida"));
@@ -252,7 +250,8 @@ public class Imobilia {
                     nTieneConstruccion = false;
                     nTamanoConstruccion = 0.0;
                 }
-                Propiedad propiedad1 = new Propiedad(nCodigoDePropiedad, nDescripcion, Provincias(nProvincia), nCanton, Tipo(nTipo), nCliente, Proposito(nProposito), nPrecio, nServicios, Estado(nEstado), nTamanoDelTerreno, nTieneConstruccion, nTamanoConstruccion);
+                
+                Propiedad propiedad1 = new Propiedad(nCodigoDePropiedad, nDescripcion, Provincias(nProvincia), nCanton, Tipo(nTipo), nCliente, Proposito(nProposito), nPrecio, Estado(nEstado), nTamanoDelTerreno, nTieneConstruccion, nTamanoConstruccion);
                 propiedades.add(propiedad1);
             }
         } catch (Exception e) {
@@ -292,9 +291,26 @@ public class Imobilia {
     }
 
     /* Metodos de reporteria */
-    public static void ReporteMensual(){}
+    public static void ReporteMensual(ArrayList<Cliente> clientes){
+        
+        String s = "";
+        
+        if (!clientes.isEmpty())
+        {
+            for (int i = 0;i<clientes.size();i++)
+            {
+                
+                for (Factura testing:clientes.get(i).getFacturasPorPagar())
+                {
+                   s+=clientes.get(1).getNombre()+" "+"debe pagar"+ testing.totalPorPagar()+"por los servicios que tienen asignados a sus propiedades\n2";
+                }
+            }
+            JOptionPane.showMessageDialog(null, s);
+        }
     
-    public static void ReporteXProvincia(Provincias pProvincia, ArrayList propiedades, String pCriteriousqueda) {
+    }
+    
+    public static void ReporteXProvincia(ArrayList propiedades) {
         String salida = "";
 
 
@@ -310,9 +326,44 @@ public class Imobilia {
 
     }
 
-    public static void ReporteXPrecio(ArrayList propiedades) {}
+    public static void ReporteXPrecio(ArrayList<Propiedad> propiedades) {
+        int precio_inicial=0;
+        int precio_final=0;
+        String s="Propiedades en el rango escogido:";
+        try{
+            precio_inicial = Integer.parseInt(JOptionPane.showInputDialog("ingrese precio minimo"));
+            precio_final = Integer.parseInt(JOptionPane.showInputDialog("ingrese precio maximo"));
+            for(int i=0;i<propiedades.size();i++)
+            {
+                if(propiedades.get(i).getPrecio()>precio_inicial && propiedades.get(i).getPrecio() < precio_final)
+                {
+                    s+=propiedades.get(i).getDescripcion()+"\n";
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(null, s);
+    }
 
-    public static void OcupiedOrDesocupied(ArrayList propiedades) {}
+    public static void OcupiedOrDesocupied(ArrayList<Propiedad> propiedades) {
+        String s="Propiedades desocupadas:";
+        for(int i=0;i<propiedades.size();i++)
+        {
+            if(propiedades.get(i).getEstado().equals(Estado.DESOCUPADA.getString())) 
+            {
+                s+=propiedades.get(i).getDescripcion()+": "+ propiedades.get(i).getEstado()+"\n";
+            }
+            else
+            {
+                    s+=propiedades.get(i).getDescripcion()+": "+"Ocupada\n";
+            }
+            JOptionPane.showMessageDialog(null, s);
+        }
+    
+    }
 
     /* Metodos para los enums*/
     public static String Provincias(int i) {

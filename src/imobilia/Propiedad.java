@@ -29,7 +29,7 @@ public class Propiedad {
     //Precio
     private double precio;
     //Servicios asociados.(agua - Luz - Teléfono - Cable - Transporte - publico seguridad - etc)
-    private ArrayList servicios = new ArrayList();
+    
     //Estado (Desocupada – alquilada - remodelando - vendida)
     private String Estado;
     //Tamaño del terreno
@@ -42,7 +42,7 @@ public class Propiedad {
     
 
     //constructor por verificar y modificar
-    public Propiedad(int codigoPropiedad, String descripcion, String provincia, String canton, String tipo, Cliente cliente, String proposito, double precio, ArrayList servicios, String Estado, double tamanoTerreno, boolean tieneConstruccion, double tamañoConstruccion) {
+    public Propiedad(int codigoPropiedad, String descripcion, String provincia, String canton, String tipo, Cliente cliente, String proposito, double precio, String Estado, double tamanoTerreno, boolean tieneConstruccion, double tamañoConstruccion) {
         this.codigoPropiedad = codigoPropiedad;
         this.descripcion = descripcion;
         this.provincia = provincia;
@@ -55,7 +55,7 @@ public class Propiedad {
         this.tamanoTerreno = tamanoTerreno;
         this.tieneConstruccion = tieneConstruccion;
         this.tamañoConstruccion = tamañoConstruccion;
-        this.servicios = servicios;
+       
     }
     //getters y setters
 

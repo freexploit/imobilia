@@ -28,4 +28,5 @@ public enum Estado {
         else {return null;}
         
     }
+    public String getString(){return this.Estado;}
 }
