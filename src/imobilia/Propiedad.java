@@ -18,20 +18,20 @@ public class Propiedad {
     //descripcion
     private String descripcion;
     //Ubicación (Provincia y Cantón)
-    private int provincia;
+    private String provincia;
     private String canton;
     //Tipo. (Lote – Bodega – Casa – Edificio - Local)
-    private int tipo;
+    private String tipo;
     //Propietario
     private Cliente cliente;
     //Propósito (Vender Alquilar Eventos)
-    private int proposito;
+    private String proposito;
     //Precio
     private double precio;
     //Servicios asociados.(agua - Luz - Teléfono - Cable - Transporte - publico seguridad - etc)
     private ArrayList servicios = new ArrayList();
     //Estado (Desocupada – alquilada - remodelando - vendida)
-    private int Estado;
+    private String Estado;
     //Tamaño del terreno
     private double tamanoTerreno;
     //tiene construccion
@@ -42,7 +42,7 @@ public class Propiedad {
     
 
     //constructor por verificar y modificar
-    public Propiedad(int codigoPropiedad, String descripcion, int provincia, String canton, int tipo, Cliente cliente, int proposito, double precio, ArrayList servicios, int Estado, double tamanoTerreno, boolean tieneConstruccion, double tamañoConstruccion) {
+    public Propiedad(int codigoPropiedad, String descripcion, String provincia, String canton, String tipo, Cliente cliente, String proposito, double precio, ArrayList servicios, String Estado, double tamanoTerreno, boolean tieneConstruccion, double tamañoConstruccion) {
         this.codigoPropiedad = codigoPropiedad;
         this.descripcion = descripcion;
         this.provincia = provincia;
@@ -75,11 +75,11 @@ public class Propiedad {
         this.descripcion = descripcion;
     }
 
-    public int getProvincia() {
+    public String getProvincia() {
         return provincia;
     }
 
-    public void setProvincia(int provincia) {
+    public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
 
@@ -107,11 +107,11 @@ public class Propiedad {
         this.canton = canton;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -123,11 +123,11 @@ public class Propiedad {
         this.cliente = cliente;
     }
 
-    public int getProposito() {
+    public String getProposito() {
         return proposito;
     }
 
-    public void setProposito(int proposito) {
+    public void setProposito(String proposito) {
         this.proposito = proposito;
     }
 
@@ -139,11 +139,11 @@ public class Propiedad {
         this.precio = precio;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return Estado;
     }
 
-    public void setEstado(int Estado) {
+    public void setEstado(String Estado) {
         this.Estado = Estado;
     }
 

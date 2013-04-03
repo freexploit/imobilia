@@ -21,4 +21,10 @@ public enum Estado {
     {
         this.Estado=pEstado;
     }
+        public String getFromOrdinal(int ordinal){
+        if (this.ordinal()== ordinal)
+        {return this.Estado;}
+        else {return null;}
+        
+    }
 }
