@@ -22,7 +22,7 @@ public enum Provincias {
     Provincias(String Provincias){
         this.Provincias=Provincias;
     }
-    public String getFromOrdinal(int ordinal){
+        public String getFromOrdinal(int ordinal){
         if (this.ordinal()== ordinal)
         {return this.Provincias;}
         else {return null;}

@@ -22,7 +22,7 @@ public enum Tipo {
     Tipo(String pTipo){
         this.tipo=pTipo;
     }
-    public String getFromOrdinal(int ordinal){
+        public String getFromOrdinal(int ordinal){
         if (this.ordinal()== ordinal)
         {return this.tipo;}
         else {return null;}

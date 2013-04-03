@@ -5,6 +5,7 @@
 package imobilia;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,15 +19,143 @@ public class Imobilia {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-        ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
-        ArrayList<Servicio> servicios = new ArrayList<Servicio>();
-        
-     
-       
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        ArrayList<Propiedad> propiedades = new ArrayList<>();
+        ArrayList<Servicio> servicios = new ArrayList<>();
+        int opc = 0;
+        int opc1 = 0;
+        while (opc != 5) {//Ciclo while para ejecución del programa
+
+            //Presenta cuadro de diálogo de menus
+            opc = Integer.parseInt(JOptionPane.showInputDialog("Menu de opciones ingrese\n 1) para ver las opciones de Clientes\n 2) ver las opciones de propiedades\n 3) ver las opciones de servicios\n 4) para opciones de reporteria\n 5) para salir"));
+            switch (opc) {//Ciclo switch para menu de opciones
+                case 1://
+                    opc1 = 0;
+                    while (opc1 != 3) {
+                        opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de Cliente ingrese\n 1) para ingresar un cliente\n 2) para ver los clientes\n 3) para salir"));
+                        switch (opc1) {
+                            case 1:
+                                AgregarCliente(clientes);
+                                break;
+                            case 2:
+                                if (!clientes.isEmpty()) {
+                                    MostrarCliente(clientes);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "No Existen Clientes");
+                                }
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Error al seleccionar opcion, vuelva a digitar por favor",
+                                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                                break;
+
+                        }
+                    }
+                    break;
+                case 2://
+                    opc1 = 0;
+                    while (opc1 != 2) {
+                        if(servicios.isEmpty()){JOptionPane.showMessageDialog(null, "no existen servicios asociados puede generar propiedades pero sin asociar servicios");
+                        }
+                        opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de propiedades ingrese\n 1) para ingresar una propiedad nueva\n 2) para salir"));
+                        switch (opc1) {
+                            case 1:
+                                if (!clientes.isEmpty()) {
+                                    AgregarPropiedad(clientes, propiedades, servicios);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Se necitan Clientes para poder agregar propiedades y no existen clientes por favor ingrese un cliente");
+                                }
+
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Error al seleccionar opcion, vuelva a digitar por favor",
+                                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                                break;
+                        }
+                    }
+                    break;
+                case 3://
+                    opc1 = 0;
+                    while (opc1 != 3) {
+                        opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de Servicios ingrese:\n 1) para agregar servicios\n 2) para ver servicios\n 3) para salir"));
+                        switch (opc1) {
+                            case 1:
+                                AgregarServicio(servicios);
+                                break;
+                            case 2:
+                                if (!servicios.isEmpty()) {
+                                    MostrarServicios(servicios);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "No existen servicios");
+                                }
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Error al seleccionar opcion, vuelva a digitar por favor",
+                                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                                break;
+                        }
+
+                    }
+
+                    break;
+                case 4://
+                    opc1 = 0;
+                    while (opc1 != 6) {
+                        opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de Reporteria ingrese:\n 1) para un reporte de propiedas alquiladas y su monto a pagar por servicios\n 2) para propiedades ocupadas\n 3) para propiedades desocupadas\n 4) para listado de propiedades por provincia\n 5) reporte de propiedades por rando de precio\n 6)para salir"));
+                        switch (opc1) {
+                            case 1:
+                                ReporteMensual();
+                                break;
+                            case 2:
+                                OcupiedOrDesocupied(propiedades);
+                                break;
+                            case 3:
+                                OcupiedOrDesocupied(propiedades);
+                                break;
+                            case 4:
+                                //ReporteXProvincia();
+                                break;
+                            case 5:
+                                ReporteXPrecio(propiedades);
+                                break;
+                            case 6:
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Error al seleccionar opcion, vuelva a digitar por favor",
+                                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                                break;
+                        }
+
+                    }
+
+                    break;
+
+                case 5://En caso de ser la opcion seleccionada el 1 se dirige al método para salir del prg
+                    JOptionPane.showMessageDialog(null, "Saliendo del programa",
+                            "Salir", JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+                    break;
+
+                default://En caso de ser la opcion seleccionada erronea solicita nuevamente el numero.
+                    JOptionPane.showMessageDialog(null, "Error al seleccionar opcion, vuelva a digitar por favor",
+                            "ERROR", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
+
+
+        }
+
+
+
     }
 
-    public static String MostrarCliente(ArrayList clientes) {
+    public static void MostrarCliente(ArrayList clientes) {
         String Salida = "";
         for (int i = 0; i < clientes.size(); i++) {
             Cliente cliente1 = (Cliente) clientes.get(i);
@@ -37,7 +166,7 @@ public class Imobilia {
             Salida += "\n" + "Nombre: " + n1 + " " + n2 + " " + n3 + " Codigo: " + c1;
         }
         JOptionPane.showMessageDialog(null, Salida);
-        return Salida;
+
     }
 
     private static int LlenarFecha(String Variable) {
@@ -84,30 +213,33 @@ public class Imobilia {
         return null;
     }
 
-    public void AgregarPropiedad(ArrayList clientes, ArrayList propiedades) {
+    public static void AgregarPropiedad(ArrayList clientes, ArrayList propiedades, ArrayList servicios) {
         try {
             if (clientes.isEmpty()) {
                 System.out.print("No Existen Clientes");
             } else {
-                int nCodigoDePropiedad = Integer.parseInt(JOptionPane.showInputDialog("ingrese Coddigo de Propiedad"));
+                int nCodigoDePropiedad = Integer.parseInt(JOptionPane.showInputDialog("ingrese Codigo de Propiedad"));
                 String nDescripcion = JOptionPane.showInputDialog("ingrese Descripcion");
                 int nProvincia = Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero de la provincia:\n 1)San Jose\n 2)Alajuela\n 3) Cartago\n 4) heredia\n 5) guanacaste\n 6) Puntarenas\n 7) Limon"));
-                
+
                 String nCanton = JOptionPane.showInputDialog("ingrese Canton");
                 int nTipo = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) para lote\n 2) para bodega\n 3) para casa\n 4) para edificio\n 5) para local"));
-                MostrarCliente(null);
+                MostrarCliente(clientes);
                 int nCcod = Integer.parseInt(JOptionPane.showInputDialog("ingrese el Codigo de Cliente"));
-                Cliente nCliente = BuscarCliente(nCcod, null);
-                int nProposito = Integer.parseInt(JOptionPane.showInputDialog("ingrese Proposito:\n 1) vender\n 2) alquilar\n 3) "));
+                Cliente nCliente = BuscarCliente(nCcod, clientes);
+                int nProposito = Integer.parseInt(JOptionPane.showInputDialog("ingrese Proposito:\n 1) vender\n 2) alquilar\n 3)eventos "));
                 double nPrecio = Double.parseDouble(JOptionPane.showInputDialog("ingrese el valor de la propiedad"));
-                MostrarServicios(null);
-                int cantidad = Integer.parseInt("Ingrese la cantidad de servicios de la propiedad");
                 ArrayList nServicios = new ArrayList();
+                if(!servicios.isEmpty()){
+                MostrarServicios(servicios);
+                int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de servicios de la propiedad"));
                 for (int i = 0; i < cantidad; i++) {
                     String sNombre = JOptionPane.showInputDialog("Ingrese el nombre exacto del servicio del servcio");
                     Servicio nServicio = BuscarServicios(sNombre, null);
                     nServicios.add(nServicio);
                 }
+                }
+                else{JOptionPane.showInputDialog("no existen servicios");}
                 int nEstado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el estado de la propiedad:\n 1) alquilada\n 2) remodelando\n 3) vendida"));
                 double nTamanoDelTerreno = Double.parseDouble(JOptionPane.showInputDialog("ingrese Tamaño del terreno"));
                 int nboolean = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) si tiene construccion\n 2) si no tiene construccion"));
@@ -127,7 +259,7 @@ public class Imobilia {
         }
     }
 
-    public void AgregarServicio(ArrayList servicios) {
+    public static void AgregarServicio(ArrayList servicios) {
         try {
             String nNombre = JOptionPane.showInputDialog("Ingrese Nombre del Servicio");
             double nPrecioConsumo = Double.parseDouble(JOptionPane.showInputDialog("Ingrese Precio"));
@@ -139,7 +271,7 @@ public class Imobilia {
         }
     }
 
-    public Servicio BuscarServicios(String nNombre, ArrayList servicios) {
+    public static Servicio BuscarServicios(String nNombre, ArrayList servicios) {
         for (int i = 0; i < servicios.size(); i++) {
             Servicio servicio = (Servicio) servicios.get(i);
             if (servicio.getNombre().contains(nNombre)) {
@@ -149,7 +281,7 @@ public class Imobilia {
         return null;
     }
 
-    public static String MostrarServicios(ArrayList servicios) {
+    public static void MostrarServicios(ArrayList servicios) {
         String Salida = "";
         for (int i = 0; i < servicios.size(); i++) {
             Servicio servicio = (Servicio) servicios.get(i);
@@ -157,58 +289,69 @@ public class Imobilia {
             Salida += "\n" + n1;
         }
         JOptionPane.showMessageDialog(null, Salida);
-        return Salida;
     }
 
-    public static String ReporteXProvincia(Provincias pProvincia, ArrayList propiedades, String pCriteriousqueda) {
-        String salida="";
-        
+    /* Metodos de reporteria */
+    public static void ReporteMensual(){}
+    
+    public static void ReporteXProvincia(Provincias pProvincia, ArrayList propiedades, String pCriteriousqueda) {
+        String salida = "";
+
 
         if (!propiedades.isEmpty()) {
             for (int i = 0; i < propiedades.size(); i++) {
                 Propiedad property = (Propiedad) propiedades.get(i);
-                salida += "la propiedad con el codigo " + property.getCodigoPropiedad() + " en la provincia"+property.getProvincia();
+                salida += "la propiedad con el codigo " + property.getCodigoPropiedad() + " en la provincia" + property.getProvincia();
+            JOptionPane.showMessageDialog(null, salida);
             }
         }
-        return salida;
+        else{JOptionPane.showMessageDialog(null, "no existen propiedades");
+        }
+
     }
-    public static String ReporteXPrecio(ArrayList propiedades){return null;}
-    public static String OcupiedOrDesocupied(ArrayList propiedades){return null;}
-    
+
+    public static void ReporteXPrecio(ArrayList propiedades) {}
+
+    public static void OcupiedOrDesocupied(ArrayList propiedades) {}
+
     /* Metodos para los enums*/
-    
-    public static String Provincias(int i){
-        for (Provincias prov: Provincias.values())
-        {
-            if(prov.getFromOrdinal(i)!= null){return prov.getFromOrdinal(i);}
+    public static String Provincias(int i) {
+        for (Provincias prov : Provincias.values()) {
+            if (prov.getFromOrdinal(i) != null) {
+                return prov.getFromOrdinal(i);
+            }
         }
         return null;
-        
+
     }
-    public static String Estado(int i){
-        for (Estado est: Estado.values())
-        {
-            if(est.getFromOrdinal(i)!= null){return est.getFromOrdinal(i);}
+
+    public static String Estado(int i) {
+        for (Estado est : Estado.values()) {
+            if (est.getFromOrdinal(i) != null) {
+                return est.getFromOrdinal(i);
+            }
         }
         return null;
-        
+
     }
-    public static String Tipo(int i){
-        for (Tipo t: Tipo.values())
-        {
-            if(t.getFromOrdinal(i)!= null){return t.getFromOrdinal(i);}
+
+    public static String Tipo(int i) {
+        for (Tipo t : Tipo.values()) {
+            if (t.getFromOrdinal(i) != null) {
+                return t.getFromOrdinal(i);
+            }
         }
         return null;
-        
+
     }
-    public static String Proposito(int i){
-        for (Proposito pro: Proposito.values())
-        {
-            if(pro.getFromOrdinal(i)!= null){return pro.getFromOrdinal(i);}
+
+    public static String Proposito(int i) {
+        for (Proposito pro : Proposito.values()) {
+            if (pro.getFromOrdinal(i) != null) {
+                return pro.getFromOrdinal(i);
+            }
         }
         return null;
-        
+
     }
-    
-    
 }
