@@ -4,6 +4,9 @@
  */
 package imobilia;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author christopher
@@ -18,8 +21,18 @@ public enum Estado {
     
     
     private String Estado="";
+    
     Estado(String pEstado)
     {
         this.Estado=pEstado;
+       
+        
     }
+    public String getFromOrdinal(int ordinal){
+        if (this.ordinal()== ordinal)
+        {return this.Estado;}
+        else {return null;}
+        
+    }
+    
 }

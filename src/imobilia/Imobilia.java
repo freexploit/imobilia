@@ -5,6 +5,7 @@
 package imobilia;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +22,9 @@ public class Imobilia {
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
         ArrayList<Servicio> servicios = new ArrayList<Servicio>();
-
-
+        
+     
+       
     }
 
     public static String MostrarCliente(ArrayList clientes) {
@@ -47,7 +49,7 @@ public class Imobilia {
     /**
      *
      */
-    public void AgregarCliente(ArrayList clientes) {
+    public static void AgregarCliente(ArrayList clientes) {
         try {
             String nNombre = JOptionPane.showInputDialog("ingrese nombre");
             String nApellido1 = JOptionPane.showInputDialog("ingrese apellido");
@@ -67,6 +69,8 @@ public class Imobilia {
             Cliente cliente1 = new Cliente(nCedula, nCCod, nNombre, nApellido1, nApellido2, fecha1, nTelefono, ndireccion, nTipoCliente, nPeriodoPago);
             clientes.add(cliente1);
         } catch (Exception e) {
+            String toString = e.toString();
+            System.out.println(toString);
         }
 
     }
@@ -89,6 +93,7 @@ public class Imobilia {
                 int nCodigoDePropiedad = Integer.parseInt(JOptionPane.showInputDialog("ingrese Coddigo de Propiedad"));
                 String nDescripcion = JOptionPane.showInputDialog("ingrese Descripcion");
                 int nProvincia = Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero de la provincia:\n 1)San Jose\n 2)Alajuela\n 3) Cartago\n 4) heredia\n 5) guanacaste\n 6) Puntarenas\n 7) Limon"));
+                
                 String nCanton = JOptionPane.showInputDialog("ingrese Canton");
                 int nTipo = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) para lote\n 2) para bodega\n 3) para casa\n 4) para edificio\n 5) para local"));
                 MostrarCliente(null);
@@ -116,7 +121,7 @@ public class Imobilia {
                     nTieneConstruccion = false;
                     nTamanoConstruccion = 0.0;
                 }
-                Propiedad propiedad1 = new Propiedad(nCodigoDePropiedad, nDescripcion, nProvincia, nCanton, nTipo, nCliente, nProposito, nPrecio, nServicios, nEstado, nTamanoDelTerreno, nTieneConstruccion, nTamanoConstruccion);
+                Propiedad propiedad1 = new Propiedad(nCodigoDePropiedad, nDescripcion, Provincias(nProvincia), nCanton, Tipo(nTipo), nCliente, Proposito(nProposito), nPrecio, nServicios, Estado(nEstado), nTamanoDelTerreno, nTieneConstruccion, nTamanoConstruccion);
                 propiedades.add(propiedad1);
             }
         } catch (Exception e) {
@@ -163,65 +168,48 @@ public class Imobilia {
         if (!propiedades.isEmpty()) {
             for (int i = 0; i < propiedades.size(); i++) {
                 Propiedad property = (Propiedad) propiedades.get(i);
-                switch (pProvincia) {
-                    case SANJOSE:
-                        if (property.getProvincia()==1) {
-                            int ccod = property.getCodigoPropiedad();
-                            salida += "la propiedad con el codigo " + ccod + " en la provincia San Jose";
-                        }
-                        break;
-                    case ALAJUELA:
-                        if (property.getProvincia()==2) {
-                                                        int ccod = property.getCodigoPropiedad();
-                            salida += "la propiedad con el codigo " + ccod + " en la provincia San Jose";
-
-                        }
-                        break;
-
-                    case CARTAGO:
-                        if (property.getProvincia()==3) {
-                            int ccod = property.getCodigoPropiedad();
-                            salida += "la propiedad con el codigo " + ccod + " en la provincia San Jose";
-
-                        }
-                        break;
-
-                    case HEREDIA:
-                        if (property.getProvincia()==4) {
-                            int ccod = property.getCodigoPropiedad();
-                            salida += "la propiedad con el codigo " + ccod + " en la provincia San Jose";
-
-                        }
-                        break;
-
-                    case GUANACASTE:
-                        if (property.getProvincia()==5) {
-                            int ccod = property.getCodigoPropiedad();
-                            salida += "la propiedad con el codigo " + ccod + " en la provincia San Jose";
-
-                        }
-                        break;
-                    case PUNTARENAS:
-                        if (property.getProvincia()==6) {
-                            int ccod = property.getCodigoPropiedad();
-                            salida += "la propiedad con el codigo " + ccod + " en la provincia San Jose";
-
-                        }
-                        break;
-                    case LIMON:
-                        if (property.getProvincia()==7) {
-                            int ccod = property.getCodigoPropiedad();
-                            salida += "la propiedad con el codigo " + ccod + " en la provincia San Jose";
-
-                        }
-                        break;
-
-                }
+                salida += "la propiedad con el codigo " + property.getCodigoPropiedad() + " en la provincia"+property.getProvincia();
             }
         }
         return salida;
     }
     public static String ReporteXPrecio(ArrayList propiedades){return null;}
     public static String OcupiedOrDesocupied(ArrayList propiedades){return null;}
+    
+    /* Metodos para los enums*/
+    
+    public static String Provincias(int i){
+        for (Provincias prov: Provincias.values())
+        {
+            if(prov.getFromOrdinal(i)!= null){return prov.getFromOrdinal(i);}
+        }
+        return null;
+        
+    }
+    public static String Estado(int i){
+        for (Estado est: Estado.values())
+        {
+            if(est.getFromOrdinal(i)!= null){return est.getFromOrdinal(i);}
+        }
+        return null;
+        
+    }
+    public static String Tipo(int i){
+        for (Tipo t: Tipo.values())
+        {
+            if(t.getFromOrdinal(i)!= null){return t.getFromOrdinal(i);}
+        }
+        return null;
+        
+    }
+    public static String Proposito(int i){
+        for (Proposito pro: Proposito.values())
+        {
+            if(pro.getFromOrdinal(i)!= null){return pro.getFromOrdinal(i);}
+        }
+        return null;
+        
+    }
+    
     
 }

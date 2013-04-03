@@ -21,5 +21,11 @@ public enum Proposito {
     {
         this.proposito=pProposito;
     }
+    public String getFromOrdinal(int ordinal){
+        if (this.ordinal()== ordinal)
+        {return this.proposito;}
+        else {return null;}
+        
+    }
     
 }
