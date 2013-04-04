@@ -301,7 +301,7 @@ public class Imobilia {
                 
                 for (Factura testing:clientes.get(i).getFacturasPorPagar())
                 {
-                   s+=clientes.get(1).getNombre()+" "+"debe pagar"+ testing.totalPorPagar()+"por los servicios que tienen asignados a sus propiedades\n2";
+                   s+=clientes.get(i).getNombre()+" "+"debe pagar"+ testing.totalPorPagar()+"por los servicios que tienen asignados a sus propiedades\n2";
                 }
             }
             JOptionPane.showMessageDialog(null, s);
