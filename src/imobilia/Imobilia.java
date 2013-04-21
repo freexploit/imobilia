@@ -17,6 +17,42 @@ public class Imobilia {
     /**
      * @param args the command line arguments
      */
+    
+    
+    
+    
+     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainWindow().setVisible(true);
+            }
+        });
+    }
+   /* 
     public static void main(String[] args) {
         // TODO code application logic here
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
@@ -106,7 +142,7 @@ public class Imobilia {
                     break;
                 case 4://
                     opc1 = 0;
-                    while (opc1 != 6) {
+                    while (opc1 != 5) {
                         opc1 = Integer.parseInt(JOptionPane.showInputDialog("Menu de Reporteria ingrese:\n 1) para un Reporte de propiedas alquiladas y su monto a pagar por servicios\n 2) para propiedades ocupadas\n 3) Reporte de propiedades por provincia\n 4) reporte de propiedades por rango de precio\n 5)para salir"));
                         switch (opc1) {
                             case 1:
@@ -150,7 +186,7 @@ public class Imobilia {
 
 
     }
-
+*/
     public static void MostrarCliente(ArrayList clientes) {
         String Salida = "";
         for (int i = 0; i < clientes.size(); i++) {
@@ -237,7 +273,7 @@ public class Imobilia {
                 nCliente.setFactura(factura);
                 }
                 else{JOptionPane.showMessageDialog(null,"no existen servicios");}
-                int nEstado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el estado de la propiedad:\n 1) alquilada\n 2) remodelando\n 3) vendida"));
+                int nEstado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el estado de la propiedad:\n 1)Desocupada 2)alquilada\n 3) remodelando\n 4) vendida\n"));
                 double nTamanoDelTerreno = Double.parseDouble(JOptionPane.showInputDialog("ingrese Tamaño del terreno"));
                 int nboolean = Integer.parseInt(JOptionPane.showInputDialog("ingrese:\n 1) si tiene construccion\n 2) si no tiene construccion"));
                 double nTamanoConstruccion;
@@ -301,7 +337,7 @@ public class Imobilia {
                 
                 for (Factura testing:clientes.get(i).getFacturasPorPagar())
                 {
-                   s+=clientes.get(i).getNombre()+" "+"debe pagar"+ testing.totalPorPagar()+"por los servicios que tienen asignados a sus propiedades\n2";
+                   s+=clientes.get(i).getNombre()+" "+"debe pagar "+ testing.totalPorPagar()+" por los servicios que tienen asignados a sus propiedades\n";
                 }
             }
             JOptionPane.showMessageDialog(null, s);
@@ -316,7 +352,7 @@ public class Imobilia {
         if (!propiedades.isEmpty()) {
             for (int i = 0; i < propiedades.size(); i++) {
                 Propiedad property = (Propiedad) propiedades.get(i);
-                salida += "la propiedad con el codigo " + property.getCodigoPropiedad() + " en la provincia" + property.getProvincia();
+                salida += "la propiedad con el codigo " + property.getCodigoPropiedad() + "esta  en la provincia" + property.getProvincia();
             JOptionPane.showMessageDialog(null, salida);
             }
         }
@@ -348,7 +384,7 @@ public class Imobilia {
     }
 
     public static void OcupiedOrDesocupied(ArrayList<Propiedad> propiedades) {
-        String s="Propiedades desocupadas:";
+        String s="Propiedades:";
         for(int i=0;i<propiedades.size();i++)
         {
             if(propiedades.get(i).getEstado().equals(Estado.DESOCUPADA.getString())) 
