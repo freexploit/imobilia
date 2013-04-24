@@ -47,6 +47,7 @@ public class Imobilia {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainWindow().setVisible(true);
             }
@@ -217,9 +218,9 @@ public class Imobilia {
             Long nCedula = Long.parseLong(JOptionPane.showInputDialog("ingrese cedula"));
             int nCCod;
             if (clientes.isEmpty()) {
-                nCCod = 0;
+                nCCod = 1;
             } else {
-                nCCod = clientes.size();
+                nCCod = clientes.size()+1;
             }//este codigo hay q verificarlo
             Fecha fecha1 = new Fecha(LlenarFecha("Mes de nacimiento"), LlenarFecha("Dia De Nacimiento"), LlenarFecha("Año"));
             long nTelefono = Long.parseLong(JOptionPane.showInputDialog("ingrese telefono"));
@@ -441,3 +442,4 @@ public class Imobilia {
 
     }
 }
+    
