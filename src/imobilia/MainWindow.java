@@ -1,5 +1,7 @@
 package imobilia;
 
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JFrame;
 
 /*
@@ -17,6 +19,73 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+    }
+    public static Factura factura = new Factura();
+    public ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+    public ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
+    public ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+    public String MostrarServicios() {
+        String Salida = "";
+        for (int i = 0; i < servicios.size(); i++) {
+            Servicio servicio = (Servicio) servicios.get(i);
+            String n1 = servicio.getNombre();
+            Salida += "\n" + n1;
+        }
+        return Salida;
+    }
+        public String MostrarCliente() {
+        String Salida = "";
+        for (int i = 0; i < clientes.size(); i++) {
+            Cliente cliente1 = (Cliente) clientes.get(i);
+            int c1 = cliente1.getcCod();
+            String n1 = cliente1.getNombre();
+            String n2 = cliente1.getApellido1();
+            String n3 = cliente1.getApellido2();
+            Salida += "\n" + "Nombre: " + n1 + " " + n2 + " " + n3 + " Codigo: " + c1;
+            
+        }
+        return Salida;
+        }
+
+    public Servicio obtenerServicio(String pnombre) {
+        for (int i = 0; i < servicios.size(); i++) {
+            Servicio servicio = (Servicio) servicios.get(i);
+            if (servicio.getNombre().contains(pnombre)) {
+                return servicio;
+
+            }
+        }
+        return null;
+    }
+
+    public Cliente obtenerCliente(String pnombre) {
+
+        for (int i = 0; i < clientes.size(); i++) {
+            Cliente usuario = (Cliente) clientes.get(i);
+            if (usuario.getNombre().contains(pnombre)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    public void setcomboboxClientes() {
+        ClienteCombobox.removeAllItems();
+        for (int i = 0; i < clientes.size(); i++) {
+            Cliente cliente = (Cliente) clientes.get(i);
+            String name = cliente.getNombre();
+            ClienteCombobox.addItem(name);
+        }
+
+    }
+
+    public void setcomboboxServicios() {
+        APComboBoxServic.removeAllItems();
+        for (int i = 0; i < servicios.size(); i++) {
+            Servicio servicio = (Servicio) servicios.get(i);
+            String name = servicio.getNombre();
+            APComboBoxServic.addItem(name);
+        }
     }
 
     public void agregaclientenull() {
@@ -48,6 +117,7 @@ public class MainWindow extends javax.swing.JFrame {
         APTXTEstado.setText(null);
         APTXTTamañoTerreno.setText(null);
         APTXTTamañoConstruccion.setText(null);
+        factura = new Factura();
 
     }
 
@@ -69,7 +139,6 @@ public class MainWindow extends javax.swing.JFrame {
         TACCedula = new javax.swing.JFormattedTextField();
         LACSP = new javax.swing.JLabel();
         LACced = new javax.swing.JLabel();
-        LACCliente = new javax.swing.JLabel();
         LACFecha = new javax.swing.JLabel();
         BACSalvar = new javax.swing.JButton();
         BACCancelar = new javax.swing.JButton();
@@ -78,7 +147,6 @@ public class MainWindow extends javax.swing.JFrame {
         TACaño = new javax.swing.JFormattedTextField();
         LTelefono = new javax.swing.JLabel();
         LDireccion = new javax.swing.JLabel();
-        ClienteBox = new javax.swing.JComboBox();
         LACTipoCliente = new javax.swing.JLabel();
         LACPeriodoPag = new javax.swing.JLabel();
         TipoClienteCombo = new javax.swing.JComboBox();
@@ -118,6 +186,8 @@ public class MainWindow extends javax.swing.JFrame {
         APCancelB = new javax.swing.JButton();
         APGuardarB = new javax.swing.JButton();
         ClienteCombobox = new javax.swing.JComboBox();
+        APComboBoxServic = new javax.swing.JComboBox();
+        APAgregar = new javax.swing.JButton();
         AgregaServicio = new javax.swing.JFrame();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -139,6 +209,11 @@ public class MainWindow extends javax.swing.JFrame {
         EFACEPB = new javax.swing.JButton();
         EFCANCB = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        Error1 = new javax.swing.JFrame();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        EFJTAREA1 = new javax.swing.JTextArea();
+        EFACEPB1 = new javax.swing.JButton();
+        EFCANCB1 = new javax.swing.JButton();
         MenuBarra = new javax.swing.JMenuBar();
         mFile = new javax.swing.JMenu();
         menuNuevo = new javax.swing.JMenuItem();
@@ -149,7 +224,6 @@ public class MainWindow extends javax.swing.JFrame {
         VerListaClientes = new javax.swing.JMenuItem();
         Mpropiedad = new javax.swing.JMenu();
         AgregarPropiedad = new javax.swing.JMenuItem();
-        VerListaPropiedad = new javax.swing.JMenuItem();
         MServicioAsoc = new javax.swing.JMenu();
         AgregarServicios = new javax.swing.JMenuItem();
         ListaServicios = new javax.swing.JMenuItem();
@@ -171,8 +245,6 @@ public class MainWindow extends javax.swing.JFrame {
         LACSP.setText("Segundo Apellido");
 
         LACced.setText("Cedula");
-
-        LACCliente.setText("Cliente");
 
         LACFecha.setText("Fecha");
 
@@ -200,15 +272,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         LDireccion.setText("Direccion");
 
-        ClienteBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         LACTipoCliente.setText("Tipo Cliente");
 
         LACPeriodoPag.setText("Periodo Pago");
 
-        TipoClienteCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TipoClienteCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fisico", "Juridico" }));
 
-        PeriodoPagoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        PeriodoPagoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30 Dias", "60 Dias" }));
 
         Separador1.setText("/");
 
@@ -232,7 +302,6 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(LACLPM)
                             .addComponent(LACSP)
                             .addComponent(LACced)
-                            .addComponent(LACCliente)
                             .addComponent(LACFecha)
                             .addComponent(LTelefono)
                             .addComponent(LDireccion)
@@ -240,7 +309,6 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(LACPeriodoPag))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(AgregaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ClienteBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(AgregaClienteLayout.createSequentialGroup()
                                 .addComponent(TACMes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -280,11 +348,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(AgregaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TACCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LACced))
-                .addGap(10, 10, 10)
-                .addGroup(AgregaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClienteBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LACCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AgregaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LACFecha)
                     .addComponent(TACMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,7 +372,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(AgregaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LACPeriodoPag)
                     .addComponent(PeriodoPagoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(AgregaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BACSalvar)
                     .addComponent(BACCancelar))
@@ -327,9 +391,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel6.setText("Cliente");
 
-        APTIPOComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        APTIPOComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lote", "Bodega", "Casa", "Edificio", "Local" }));
+        APTIPOComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                APTIPOComboBoxActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vender", "Alquilar", "Eventos" }));
 
         jLabel13.setText("Proposito");
 
@@ -337,11 +406,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel15.setText("Servicios");
 
-        APServicios.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        APServicios.setToolTipText("");
         jScrollPane1.setViewportView(APServicios);
 
         jLabel16.setText("Estado");
@@ -352,9 +417,23 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel19.setText("Tamaño Construccion");
 
+        buttonGroup1.add(APButonSI);
         APButonSI.setText("SI");
+        APButonSI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                APButonSIActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(APButonNo);
         APButonNo.setText("NO");
+        APButonNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                APButonNoActionPerformed(evt);
+            }
+        });
+
+        APTXTTamañoConstruccion.setEditable(false);
 
         APCancelB.setText("Cancelar");
         APCancelB.addActionListener(new java.awt.event.ActionListener() {
@@ -370,7 +449,22 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        ClienteCombobox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ClienteCombobox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente" }));
+
+        APComboBoxServic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Servicios" }));
+        APComboBoxServic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                APComboBoxServicActionPerformed(evt);
+            }
+        });
+
+        APAgregar.setText("Agregar");
+        APAgregar.setEnabled(false);
+        APAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                APAgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AgregaPropiedadLayout = new javax.swing.GroupLayout(AgregaPropiedad.getContentPane());
         AgregaPropiedad.getContentPane().setLayout(AgregaPropiedadLayout);
@@ -400,14 +494,6 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel16)
                     .addGroup(AgregaPropiedadLayout.createSequentialGroup()
                         .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(APTXTEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(APTXTTamañoTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(AgregaPropiedadLayout.createSequentialGroup()
-                        .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
@@ -418,24 +504,34 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(APTXTCodigoPropiedad)
                             .addComponent(APTXTCanton)
                             .addComponent(APTXTProvincia)))
-                    .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(AgregaPropiedadLayout.createSequentialGroup()
-                            .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel13)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel14))
-                            .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(AgregaPropiedadLayout.createSequentialGroup()
-                                    .addGap(59, 59, 59)
-                                    .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(ClienteCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(APTIPOComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(AgregaPropiedadLayout.createSequentialGroup()
-                                    .addGap(62, 62, 62)
-                                    .addComponent(APTXTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(AgregaPropiedadLayout.createSequentialGroup()
+                        .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel14))
+                        .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AgregaPropiedadLayout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ClienteCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(APTIPOComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(AgregaPropiedadLayout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(APTXTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(AgregaPropiedadLayout.createSequentialGroup()
+                        .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel15)
+                            .addComponent(APAgregar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(APTXTEstado)
+                                .addComponent(APTXTTamañoTerreno)
+                                .addComponent(APComboBoxServic, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 18, Short.MAX_VALUE))
         );
         AgregaPropiedadLayout.setVerticalGroup(
@@ -477,11 +573,18 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(APTXTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(AgregaPropiedadLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(APComboBoxServic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(APAgregar))
+                    .addGroup(AgregaPropiedadLayout.createSequentialGroup()
+                        .addGap(0, 37, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addComponent(APTXTEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -502,7 +605,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(AgregaPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(APCancelB)
                     .addComponent(APGuardarB))
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         jLabel7.setText("Nombre");
@@ -543,10 +646,9 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(AgregaServicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(ASTXTNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addGroup(AgregaServicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ASTXTPrecioConsu, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(ASTXTTarifaB)
-                                .addComponent(ASTXTProvedor))))
+                            .addComponent(ASTXTPrecioConsu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(ASTXTTarifaB, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ASTXTProvedor, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(AgregaServicioLayout.createSequentialGroup()
                         .addGap(0, 77, Short.MAX_VALUE)
                         .addComponent(ASGuardarB)
@@ -655,6 +757,48 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        EFJTAREA1.setEditable(false);
+        EFJTAREA1.setColumns(20);
+        EFJTAREA1.setRows(5);
+        jScrollPane4.setViewportView(EFJTAREA1);
+
+        EFACEPB1.setText("Aceptar");
+        EFACEPB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EFACEPB1ActionPerformed(evt);
+            }
+        });
+
+        EFCANCB1.setText("Cancelar");
+        EFCANCB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EFCANCB1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Error1Layout = new javax.swing.GroupLayout(Error1.getContentPane());
+        Error1.getContentPane().setLayout(Error1Layout);
+        Error1Layout.setHorizontalGroup(
+            Error1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4)
+            .addGroup(Error1Layout.createSequentialGroup()
+                .addContainerGap(238, Short.MAX_VALUE)
+                .addComponent(EFACEPB1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EFCANCB1)
+                .addContainerGap())
+        );
+        Error1Layout.setVerticalGroup(
+            Error1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Error1Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(Error1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EFACEPB1)
+                    .addComponent(EFCANCB1))
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mFile.setText("File");
@@ -707,14 +851,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         Mpropiedad.add(AgregarPropiedad);
-
-        VerListaPropiedad.setText("Ver Propiedades");
-        VerListaPropiedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VerListaPropiedadActionPerformed(evt);
-            }
-        });
-        Mpropiedad.add(VerListaPropiedad);
 
         MenuBarra.add(Mpropiedad);
 
@@ -812,7 +948,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void AcerDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcerDeActionPerformed
         // TODO add your handling code here:
-                VentanaMostrar.setVisible(true);
+        VentanaMostrar.setVisible(true);
         VentanaMostrar.setSize(250, 250);
         VMJTXTAREA.setText("Ulantina\n Proyecto Programado 2\n Integrantes :\n Programa Control de propiedades 2013");
     }//GEN-LAST:event_AcerDeActionPerformed
@@ -855,15 +991,26 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void BACSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BACSalvarActionPerformed
         // TODO add your handling code here:
-        String txt1 = TACnombre.getText();
-        String txt2 = TACPApellido.getText();
-        String txt3 = TACSApellido.getText();
-        String txt4 = TACCedula.getText();
-        String txt5 = TACMes.getText();
-        String txt6 = TACDia.getText();
-        String txt7 = TACaño.getText();
-        String txt8 = TACTelefono.getText();
-        String txt9 = TACDireccion.getText();
+        String nombre = TACnombre.getText();
+        String apellido1 = TACPApellido.getText();
+        String apellido2 = TACSApellido.getText();
+        long ced = Long.parseLong(TACCedula.getText());
+        int mes = Integer.parseInt(TACMes.getText());
+        int dia = Integer.parseInt(TACDia.getText());
+        int ano = Integer.parseInt(TACaño.getText());
+        Fecha fecha1 = new Fecha(mes, dia, ano);
+        long telefono = Long.parseLong(TACTelefono.getText());
+        String direccion = TACDireccion.getText();
+        int nCCod;
+        if (clientes.isEmpty()) {
+            nCCod = 1;
+        } else {
+            nCCod = clientes.size() + 1;
+        }
+        int nPeriodoPago = PeriodoPagoCombo.getSelectedIndex();
+        int nTipoCliente = TipoClienteCombo.getSelectedIndex();
+        Cliente cliente1 = new Cliente(ced, nCCod, nombre, apellido1, apellido2, fecha1, telefono, direccion, nTipoCliente, nPeriodoPago);
+        clientes.add(cliente1);
         AgregaCliente.setVisible(false);
     }//GEN-LAST:event_BACSalvarActionPerformed
 
@@ -871,7 +1018,8 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaMostrar.setVisible(true);
         VentanaMostrar.setSize(450, 450);
-        VMJTXTAREA.setText("aqui va el resultado de la lista cliente");
+        String txt = MostrarCliente();
+        VMJTXTAREA.setText(txt);
 
     }//GEN-LAST:event_VerListaClientesActionPerformed
 
@@ -884,17 +1032,12 @@ public class MainWindow extends javax.swing.JFrame {
     private void AgregarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPropiedadActionPerformed
         // TODO add your handling code here:
         AgregaPropiedad.setVisible(true);
-        AgregaPropiedad.setSize(350, 600);
+        AgregaPropiedad.setSize(350, 650);
         AgregaPropiedad.setResizable(false);
         AgregaPropiedad.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setcomboboxClientes();
+        setcomboboxServicios();
     }//GEN-LAST:event_AgregarPropiedadActionPerformed
-
-    private void VerListaPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerListaPropiedadActionPerformed
-        // TODO add your handling code here:
-        VentanaMostrar.setVisible(true);
-        VentanaMostrar.setSize(450, 450);
-        VMJTXTAREA.setText("aqui va el resultado de la lista propiedad");
-    }//GEN-LAST:event_VerListaPropiedadActionPerformed
 
     private void APGuardarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APGuardarBActionPerformed
         // TODO add your handling code here:
@@ -906,6 +1049,11 @@ public class MainWindow extends javax.swing.JFrame {
         APTXTEstado.getText();
         APTXTTamañoTerreno.getText();
         APTXTTamañoConstruccion.getText();
+        String txt = (String) ClienteCombobox.getSelectedItem();//verificar
+        Cliente cliente = obtenerCliente(txt);
+        //Propiedad propiedad = new Propiedad(factura);
+        //propiedades.add(propiedad)
+        Factura factura = new Factura();
         AgregaPropiedad.setVisible(false);
     }//GEN-LAST:event_APGuardarBActionPerformed
 
@@ -922,7 +1070,8 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaMostrar.setVisible(true);
         VentanaMostrar.setSize(450, 450);
-        VMJTXTAREA.setText("aqui va el resultado de la lista de servicios");
+        String txt = MostrarServicios();
+        VMJTXTAREA.setText(txt);
     }//GEN-LAST:event_ListaServiciosActionPerformed
 
     private void AgregarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarServiciosActionPerformed
@@ -935,11 +1084,23 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void ASGuardarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ASGuardarBActionPerformed
         // TODO add your handling code here:        
-        ASTXTNombre.getText();
-        ASTXTPrecioConsu.getText();
-        ASTXTTarifaB.getText();
-        ASTXTProvedor.getText();
-        AgregaServicio.setVisible(false);
+        String txt1 = ASTXTNombre.getText();
+        String txt2 = ASTXTPrecioConsu.getText();
+        String txt3 = ASTXTTarifaB.getText();
+        String txt4 = ASTXTProvedor.getText();
+        if (txt1.isEmpty() || txt2.isEmpty() || txt3.isEmpty() || txt4.isEmpty()) {
+            Error1.setVisible(true);
+            Error1.setSize(450, 250);
+            Error1.setResizable(false);
+            EFJTAREA1.setText("Algun Campo se encuentra vacio verificar");
+            Error1.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        } else {
+            double d1 = Double.parseDouble(txt2);
+            double d2 = Double.parseDouble(txt3);
+            Servicio servicio1 = new Servicio(txt1, d1, d2, txt4);
+            servicios.add(servicio1);
+            AgregaServicio.setVisible(false);
+        }
     }//GEN-LAST:event_ASGuardarBActionPerformed
 
     private void ASCAncelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ASCAncelBActionPerformed
@@ -953,31 +1114,75 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void AlquiladasMontoPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlquiladasMontoPagarActionPerformed
         // TODO add your handling code here:
-                VentanaMostrar.setVisible(true);
+        VentanaMostrar.setVisible(true);
         VentanaMostrar.setSize(450, 450);
         VMJTXTAREA.setText("aqui va el resultado del reporte por monto a pagar");
     }//GEN-LAST:event_AlquiladasMontoPagarActionPerformed
 
     private void OcupadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OcupadasActionPerformed
         // TODO add your handling code here:
-                VentanaMostrar.setVisible(true);
+        VentanaMostrar.setVisible(true);
         VentanaMostrar.setSize(450, 450);
         VMJTXTAREA.setText("aqui va el resultado del reporte de ocupadas");
     }//GEN-LAST:event_OcupadasActionPerformed
 
     private void ProvinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProvinciasActionPerformed
         // TODO add your handling code here:
-                VentanaMostrar.setVisible(true);
+        VentanaMostrar.setVisible(true);
         VentanaMostrar.setSize(450, 450);
         VMJTXTAREA.setText("aqui va el resultado del reporte de provincias");
     }//GEN-LAST:event_ProvinciasActionPerformed
 
     private void RangoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RangoPrecioActionPerformed
         // TODO add your handling code here:
-                VentanaMostrar.setVisible(true);
+        VentanaMostrar.setVisible(true);
         VentanaMostrar.setSize(450, 450);
         VMJTXTAREA.setText("aqui va el resultado del reporte de rango de precio");
     }//GEN-LAST:event_RangoPrecioActionPerformed
+
+    private void APTIPOComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APTIPOComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_APTIPOComboBoxActionPerformed
+
+    private void APButonSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APButonSIActionPerformed
+        // TODO add your handling code here:
+        APTXTTamañoConstruccion.setEditable(true);
+    }//GEN-LAST:event_APButonSIActionPerformed
+
+    private void APButonNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APButonNoActionPerformed
+        // TODO add your handling code here:
+        APTXTTamañoConstruccion.setEditable(false);
+        APTXTTamañoConstruccion.setText(null);
+    }//GEN-LAST:event_APButonNoActionPerformed
+
+    private void EFACEPB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EFACEPB1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EFACEPB1ActionPerformed
+
+    private void EFCANCB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EFCANCB1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EFCANCB1ActionPerformed
+
+    private void APComboBoxServicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APComboBoxServicActionPerformed
+        // TODO add your handling code here:
+        APAgregar.setEnabled(true);
+    }//GEN-LAST:event_APComboBoxServicActionPerformed
+
+    private void APAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APAgregarActionPerformed
+        // TODO add your handling code here:
+        String seleccionado = (String) this.APComboBoxServic.getSelectedItem();
+
+
+        Servicio servicio = new Servicio();
+        servicio = obtenerServicio(seleccionado);
+
+        factura.agregarServicio(servicio);
+        Vector v = new Vector<String>();
+        String novo = servicio.getNombre();
+        v.add(novo);
+        APServicios.setListData(v);
+
+    }//GEN-LAST:event_APAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1014,9 +1219,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton APAgregar;
     private javax.swing.JRadioButton APButonNo;
     private javax.swing.JRadioButton APButonSI;
     private javax.swing.JButton APCancelB;
+    private javax.swing.JComboBox APComboBoxServic;
     private javax.swing.JButton APGuardarB;
     private javax.swing.JList APServicios;
     private javax.swing.JComboBox APTIPOComboBox;
@@ -1045,13 +1252,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu Ayuda;
     private javax.swing.JButton BACCancelar;
     private javax.swing.JButton BACSalvar;
-    private javax.swing.JComboBox ClienteBox;
     private javax.swing.JComboBox ClienteCombobox;
     private javax.swing.JButton EFACEPB;
+    private javax.swing.JButton EFACEPB1;
     private javax.swing.JButton EFCANCB;
+    private javax.swing.JButton EFCANCB1;
     private javax.swing.JTextArea EFJTAREA;
+    private javax.swing.JTextArea EFJTAREA1;
     private javax.swing.JFrame Error;
-    private javax.swing.JLabel LACCliente;
+    private javax.swing.JFrame Error1;
     private javax.swing.JLabel LACFecha;
     private javax.swing.JLabel LACLPM;
     private javax.swing.JLabel LACNombre;
@@ -1088,7 +1297,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea VMJTXTAREA;
     private javax.swing.JFrame VentanaMostrar;
     private javax.swing.JMenuItem VerListaClientes;
-    private javax.swing.JMenuItem VerListaPropiedad;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1111,6 +1319,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JMenu mFile;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenuItem menuGuardar;
