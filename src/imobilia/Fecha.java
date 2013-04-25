@@ -1,6 +1,8 @@
 package imobilia;
 
-public class Fecha {
+import java.io.Serializable;
+
+public class Fecha implements Serializable {
 
     private int mes = 0;  // 1-12
     private int dia = 0;    // 1-31 con base en el mes

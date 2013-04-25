@@ -4,6 +4,7 @@
  */
 package imobilia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author aleon
  */
-public class Cliente {
+public class Cliente  implements Serializable{
     //cedula
 
     private long cedula;

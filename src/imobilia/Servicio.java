@@ -4,13 +4,14 @@
  */
 package imobilia;
 
+import java.io.Serializable;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author aleon
  */
-public class Servicio {
+public class Servicio implements Serializable {
     	//nombre
         private String nombre;
         //precio por consumo

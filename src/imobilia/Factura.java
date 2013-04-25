@@ -4,7 +4,8 @@
  */
 package imobilia;
 
-import imobilia.Servicio;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.GregorianCalendar;
  *
  * @author christopher
  */
-public class Factura {
+public class Factura implements Serializable {
     //Estado factura
     
     private boolean pagada= false;

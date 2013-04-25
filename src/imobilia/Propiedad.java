@@ -4,6 +4,7 @@
  */
 package imobilia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -11,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author aleon
  */
-public class Propiedad {
+public class Propiedad implements Serializable {
 
     //codigo de propiedad
     private int codigoPropiedad;

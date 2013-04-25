@@ -4,6 +4,9 @@
  */
 package imobilia;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import javax.swing.JOptionPane;
@@ -19,10 +22,33 @@ public class Imobilia {
      */
     
     
+   
+   
     
     
      public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        
+        Contenedor  cont=null;
+        String fileName= "Database.dat";
+        try{
+            
+            File file = new File(fileName);
+            if(file.exists())
+            {
+                FileInputStream fin = new FileInputStream(fileName);
+                ObjectInputStream ois = new ObjectInputStream(fin);
+                cont = (Contenedor) ois.readObject();
+                ois.close();
+            }
+            else {
+                cont=new Contenedor();
+            }
+            
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -46,10 +72,11 @@ public class Imobilia {
         //</editor-fold>
 
         /* Create and display the form */
+        final MainWindow w = new MainWindow(cont);
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainWindow().setVisible(true);
+                w.setVisible(true);
             }
         });
     }
